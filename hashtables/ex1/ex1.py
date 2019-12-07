@@ -13,11 +13,30 @@ def get_indices_of_item_weights(weights, length, limit):
     YOUR CODE HERE
     """
 
-    return None
+    answer = []
 
+    if length <= 1:
+        return None
+    for k, v in enumerate(weights):
+        hash_table_insert(ht, v, k)
+
+    for w in weights:
+        print(hash_table_retrieve(ht, limit - w))
+        result = hash_table_retrieve(ht, limit - w)
+
+        if result is not None:
+            answer.append(result)
+        answer.sort(reverse=True)
+
+    if answer[0] == answer[1]:
+        answer[1] = 0
+        
+    return tuple(answer)
 
 def print_answer(answer):
     if answer is not None:
         print(str(answer[0] + " " + answer[1]))
     else:
         print("None")
+
+get_indices_of_item_weights([4, 4], 2, 8)
